@@ -1,4 +1,4 @@
-# Haxian Language Reference
+# Haxian 
 
 Welcome to the Haxian Interpreter!
 
