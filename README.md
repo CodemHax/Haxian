@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Haxian Language Reference
 
 Welcome to the Haxian Interpreter!
@@ -33,9 +32,13 @@ haxian > (4 + 5) / 3
 
 ---
 
-
 ## TODO / Changelog
 - [X] Develop Lexer for Haxian language
+- [X] Implement Token module for token representation
+- [X] Create interactive shell (shell.py) for REPL experience
+- [ ] Add support for variables and assignments
+- [ ] Expand error handling and reporting
+- [ ] Add more operators and language features
 
 ---
 
