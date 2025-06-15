@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Haxian Language Reference
 
 Welcome to the Haxian Interpreter!
