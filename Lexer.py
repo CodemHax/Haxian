@@ -32,13 +32,13 @@ class Lexer:
         return tok
 
     def __is__digit(self, char):
-        return '0' <= char <= '9'
+        return char is not None and '0' <= char <= '9'
 
     def ___read_number(self):
         start_pos = self.position
         dot_Count = 0
         output = ""
-        while self.__is__digit(self.current_char) or self.current_char == '.':
+        while self.current_char is not None and (self.__is__digit(self.current_char) or self.current_char == '.'):
             if self.current_char == '.':
                 dot_Count += 1
             if dot_Count > 1:
@@ -67,43 +67,71 @@ class Lexer:
                 break
         return self.__new_token(TokenType.IDENTIFIER, output)
 
-    def next_token(self)  -> Token:
+    def next_token(self) -> Token:
         tok : Token = None
         self.__skip_whitespace()
 
-        if self.current_char is not None:
-            print(f"DEBUG: current_char='{self.current_char}', ord={ord(self.current_char)}")
-        else:
-            print("DEBUG: current_char=None")
+        if self.current_char is None:
+            return self.__new_token(TokenType.EOF, "")
+
         match self.current_char:
             case '+':
                 tok = self.__new_token(TokenType.PLUS, self.current_char)
+                self.__read_char()
             case '-':
                 tok = self.__new_token(TokenType.MINUS, self.current_char)
-            case  '*':
+                self.__read_char()
+            case '*':
                 tok = self.__new_token(TokenType.ASTERISK, self.current_char)
+                self.__read_char()
             case '/':
                 tok = self.__new_token(TokenType.SLASH, self.current_char)
+                self.__read_char()
             case '^':
                 tok = self.__new_token(TokenType.POWER, self.current_char)
+                self.__read_char()
             case '%':
                 tok = self.__new_token(TokenType.MODULO, self.current_char)
+                self.__read_char()
             case '(':
                 tok = self.__new_token(TokenType.LPAREN, self.current_char)
+                self.__read_char()
             case ')':
                 tok = self.__new_token(TokenType.RPAREN, self.current_char)
-            case  '{':
+                self.__read_char()
+            case '{':
                 tok = self.__new_token(TokenType.LBRACE, self.current_char)
-            case  ';':
+                self.__read_char()
+            case '}':
+                tok = self.__new_token(TokenType.RBRACE, self.current_char)
+                self.__read_char()
+            case ';':
                 tok = self.__new_token(TokenType.SEMICOLON, self.current_char)
-            case None:
-                tok = self.__new_token(TokenType.EOF, "")
+                self.__read_char()
+            case '=':
+                tok = self.__new_token(TokenType.ASSIGN, self.current_char)
+                self.__read_char()
+            case ',':
+                tok = self.__new_token(TokenType.COMMA, self.current_char)
+                self.__read_char()
             case _:
                 if self.__is__digit(self.current_char):
-                    tok = self.___read_number()
+                    return self.___read_number()
                 elif self.__is_letter(self.current_char):
-                    tok = self.__read_identifier()
+                    return self.__read_identifier()
                 else:
                     tok = self.__new_token(TokenType.ILLEGAL, self.current_char)
-        self.__read_char()
+                    self.__read_char()
+
         return tok
+
+    def tokenize(self) -> List[Token]:
+        tokens = []
+        token = self.next_token()
+
+        while token.type != TokenType.EOF:
+            tokens.append(token)
+            token = self.next_token()
+
+        tokens.append(token)
+        return tokens
