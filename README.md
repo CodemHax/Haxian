@@ -1,4 +1,4 @@
-# Haxian Language Reference
+# Haxian Toy Language 
 
 Welcome to the Haxian Interpreter!
 
