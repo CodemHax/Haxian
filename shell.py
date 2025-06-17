@@ -1,7 +1,7 @@
-from Lexer import Lexer
-from Token import TokenType
-from AST import evaluate_arithmetic
+from Lexer import Lexer, TokenType
 from Parser import Parser
+from Token import Token
+from AST import*
 
 def main():
     while True:
