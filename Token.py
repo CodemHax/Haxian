@@ -1,9 +1,8 @@
 # Token definitions for the Haxian math interpreter language
-from enum import Enum
-from typing import Any, Dict, List, Optional, Union
+from typing import Any
 
 
-class TokenType(Enum):
+class TokenType:
     IDENTIFIER = "IDENTIFIER"
     EOF = "EOF"
     ILLEGAL = "ILLEGAL"

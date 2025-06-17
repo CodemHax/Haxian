@@ -1,7 +1,9 @@
+from typing import List
+
 from Token import Token, TokenType
-from typing import List, Optional, Tuple
 
 
+# noinspection PyUnreachableCode
 class Lexer:
     def __init__(self, source: str):
         self.source = source
@@ -31,11 +33,11 @@ class Lexer:
         tok = Token(type=tt, literal= literal, line_no=self.line_no, position=self.position)
         return tok
 
-    def __is__digit(self, char):
+    @staticmethod
+    def __is__digit(char):
         return char is not None and '0' <= char <= '9'
 
     def ___read_number(self):
-        start_pos = self.position
         dot_Count = 0
         output = ""
         while self.current_char is not None and (self.__is__digit(self.current_char) or self.current_char == '.'):
@@ -54,11 +56,11 @@ class Lexer:
         else:
             return self.__new_token(TokenType.FLOAT, float(output))
 
-    def __is_letter(self, char):
+    @staticmethod
+    def __is_letter(char):
         return char is not None and (char.isalpha() or char == '_')
 
     def __read_identifier(self):
-        start_pos = self.position
         output = ''
         while self.__is_letter(self.current_char) or (self.current_char is not None and self.current_char.isdigit()):
             output += self.current_char
@@ -68,7 +70,6 @@ class Lexer:
         return self.__new_token(TokenType.IDENTIFIER, output)
 
     def next_token(self) -> Token:
-        tok : Token = None
         self.__skip_whitespace()
 
         if self.current_char is None:
