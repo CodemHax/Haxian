@@ -1,23 +1,23 @@
 from Lexer import Lexer
 from Token import Token, TokenType
-from enum import Enum, auto
+from enum import IntEnum
 from typing import Callable
 
 from AST import *
 
 
-class PrecedenceType:
-      P_LOWEST = auto()
-      P_EQUALS = auto()
-      P_LESSGREATER = auto()
-      P_SUM = auto()
-      P_PRODUCT = auto()
-      P_EXPONENT = auto()
-      P_PREFIX = auto()
-      P_CALL = auto()
-      P_INDEX = auto()
-      P_GET = auto()
-      P_SET = auto()
+class PrecedenceType(IntEnum):
+      P_LOWEST = 1
+      P_EQUALS = 2
+      P_LESSGREATER = 3
+      P_SUM = 4
+      P_PRODUCT = 5
+      P_EXPONENT = 6
+      P_PREFIX = 7
+      P_CALL = 8
+      P_INDEX = 9
+      P_GET = 10
+      P_SET = 11
 
 PRECEDENCE = {
     TokenType.PLUS: PrecedenceType.P_SUM,
@@ -82,15 +82,9 @@ class Parser:
             return False
 
     def __current__precedence(self):
-        """
-        Fixed to return the precedence value instead of raising an exception
-        """
         return PRECEDENCE.get(self.current_token.type, PrecedenceType.P_LOWEST)
 
     def __next__precedence(self):
-        """
-        Fixed to return the precedence value instead of raising an exception
-        """
         return PRECEDENCE.get(self.peek_token.type, PrecedenceType.P_LOWEST)
 
     def __peek__error(self):

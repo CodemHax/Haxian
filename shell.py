@@ -1,22 +1,11 @@
 from Lexer import Lexer
 from Token import TokenType
-from arth import evaluate_arithmetic
-
-
-class Environment:
-    def __init__(self):
-        self.variables = {}
-
-    def set(self, name, value):
-        self.variables[name] = value
-
-    def get(self, name):
-        return self.variables.get(name, None)
+from AST import evaluate_arithmetic
+from Parser import Parser
 
 def main():
-    env = Environment()
     while True:
-        user_input = input("interpreter> ")
+        user_input = input("Haxian> ")
         if user_input.strip().lower() in ("exit", "quit"):
             print("Exiting interpreter.")
             break
@@ -37,12 +26,24 @@ def main():
             except Exception as e:
                 print(f"Error: {e}")
         else:
-            lexer = Lexer(user_input)
-            tokens = lexer.tokenize()
+            try:
+                lexer = Lexer(user_input)
+                tokens = lexer.tokenize()
 
-            if tokens and tokens[0].type != TokenType.EOF:
-                result = evaluate_arithmetic(tokens)
-                print(f"{result}")
+                if tokens and tokens[0].type != TokenType.EOF:
+                    result = evaluate_arithmetic(tokens)
+
+                    parser_lexer = Lexer(user_input)
+                    parser = Parser(parser_lexer)
+                    parser.parse_program()
+
+                    if not parser.errors:
+                        print(result)
+                    else:
+                        print(f"Result: {result} (with parser errors)")
+            except Exception as e:
+                print(f"Error: {e}")
 
 if __name__ == "__main__":
     main()
+
