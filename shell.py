@@ -1,6 +1,10 @@
 from Lexer import Lexer
 from Token import TokenType
+<<<<<<< HEAD
 from Arithmetic import evaluate_arithmetic
+=======
+from AST import evaluate_arithmetic
+>>>>>>> origin/main
 from Parser import Parser
 
 def main():
