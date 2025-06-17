@@ -22,13 +22,13 @@ Haxian is a simple interpreted language designed for learning and experimentatio
 
 ## Example Usage
 ```
-interpreter> 1 + 2 * 3
+haxian> 1 + 2 * 3
 7
-interpreter> (4 + 5) / 3
+haxian> (4 + 5) / 3
 3.0
-interpreter> 2 ^ 3
+haxian> 2 ^ 3
 8
-interpreter> 10 % 3
+haxianr> 10 % 3
 1
 ```
 
