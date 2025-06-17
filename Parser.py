@@ -186,17 +186,9 @@ class Parser:
         return float_literal
 
     def __parse_call_expression(self, function: Expression):
-        """
-        Add implementation for parsing function calls
-        """
-        # Placeholder implementation - would need to be expanded for real function calls
         self.errors.append("Function calls not yet implemented")
         return function
 
     def __parse_get_expression(self, object_expr: Expression):
-        """
-        Add implementation for property access expressions
-        """
-        # Placeholder implementation - would need to be expanded for real property access
         self.errors.append("Property access not yet implemented")
         return object_expr
