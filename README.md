@@ -14,7 +14,11 @@ Haxian is a simple interpreted language designed for learning and experimentatio
   - Division: `/`
   - Power: `^`
   - Modulo: `%`
+  - Equality: `==`
+  - Less/Greater Than: `<`, `>`
 - **Parentheses:** Use `(` and `)` to group expressions. Example: `(1 + 2) * 3`
+- **Variables:** Coming soon
+- **Functions:** Coming soon
 
 ## Example Usage
 ```
@@ -39,6 +43,20 @@ The interpreter now supports full arithmetic expression evaluation with proper o
 2. Exponentiation (^) is evaluated next
 3. Multiplication (*), division (/), and modulo (%) are evaluated next
 4. Addition (+) and subtraction (-) have the lowest precedence
+5. Comparison operators (==, <, >) have lower precedence than arithmetic operators
+
+## Parser Implementation
+Haxian uses a recursive descent parser with the following precedence levels:
+- Lowest: Base level
+- Equals: Equality comparisons
+- LessGreater: Comparison operators
+- Sum: Addition and subtraction
+- Product: Multiplication, division, and modulo
+- Exponent: Power operations
+- Prefix: Unary operators
+- Call: Function calls
+- Index: Array indexing
+- Get/Set: Property access
 
 ## Getting Started
 1. Run the interpreter with `python shell.py`.
@@ -56,9 +74,12 @@ The interpreter now supports full arithmetic expression evaluation with proper o
 - [X] Add support for power (^) and modulo (%) operators
 - [X] Fix bugs in Lexer (null checks and token handling)
 - [X] Improve error handling for file operations and expressions
+- [X] Add comparison operators
 - [ ] Add support for variables and assignments
+- [ ] Implement function calls and definitions
+- [ ] Add array and object support
 - [ ] Expand error handling and reporting
-- [ ] Add more operators and language features
+- [ ] Implement control flow statements (if/else, loops)
 
 ---
 
