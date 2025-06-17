@@ -45,18 +45,6 @@ The interpreter now supports full arithmetic expression evaluation with proper o
 4. Addition (+) and subtraction (-) have the lowest precedence
 5. Comparison operators (==, <, >) have lower precedence than arithmetic operators
 
-## Parser Implementation
-Haxian uses a recursive descent parser with the following precedence levels:
-- Lowest: Base level
-- Equals: Equality comparisons
-- LessGreater: Comparison operators
-- Sum: Addition and subtraction
-- Product: Multiplication, division, and modulo
-- Exponent: Power operations
-- Prefix: Unary operators
-- Call: Function calls
-- Index: Array indexing
-- Get/Set: Property access
 
 ## Getting Started
 1. Run the interpreter with `python shell.py`.
