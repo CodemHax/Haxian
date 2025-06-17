@@ -1,6 +1,6 @@
 from Lexer import Lexer
 from Token import TokenType
-from AST import evaluate_arithmeticgit add .
+from Arithmetic import evaluate_arithmetic
 from Parser import Parser
 
 def main():
@@ -35,7 +35,6 @@ def main():
 
                     parser_lexer = Lexer(user_input)
                     parser = Parser(parser_lexer)
-                    parser.parse_program()
 
                     if not parser.errors:
                         print(result)
